@@ -72,11 +72,13 @@
 
                         <!-- Status Tab -->
                         <div class="tab-pane fade" id="status-{{ $report->id }}">
-                            @if ($report->response->isEmpty())
-                                <p>Pengaduan belum direspon petugas, ingin menghapus pengaduan?</p>
-                                <button class="btn btn-danger mt-2" onclick="showModal({{ $report->id }}, '{{ $report->created_at }}')">
-                                    Delete
-                                </button>
+                            @if ($report->response !== null && $report->response->isNotEmpty())
+                                
+                            @else
+                            <p>Pengaduan belum direspon petugas, ingin menghapus pengaduan?</p>
+                            <button class="btn btn-danger mt-2" onclick="showModal({{ $report->id }}, '{{ $report->created_at }}')">
+                                Delete
+                            </button>
                             @endif
 
                             <h5 class="mt-4">Response History</h5>

@@ -23,7 +23,7 @@ class ResponseController extends Controller
         ]);
         
         if ($response->response_status == 'ON_PROCESS') {
-            return redirect('response.index', $id);
+            return redirect()->route('response.index', $id);
         } else {
             return redirect()->back()->with('success', 'Laporan Berhasil Ditolak');
         }

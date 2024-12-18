@@ -6,7 +6,7 @@
             <div class="card-body">
                 <h3 class="card-title text-center mb-4">Daftar Pengaduan</h3>
                 <div class="dropdown">
-                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-success dropdown-toggle mb-2" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         Export (.xlsx)
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">

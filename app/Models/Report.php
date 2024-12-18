@@ -30,7 +30,7 @@ class Report extends Model
 
     public function response()
     {
-        return $this->hasMany(Response::class);
+        return $this->hasOne(Response::class);
     }
 
   // Report.php

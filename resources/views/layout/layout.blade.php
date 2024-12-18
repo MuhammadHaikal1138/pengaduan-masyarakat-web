@@ -19,7 +19,7 @@
     </script>
 </head>
 
-<body class="bg-gray">
+<body class="bg-body-secondary">
     <!-- Navbar -->
 
     <nav class="navbar navbar-expand-lg">

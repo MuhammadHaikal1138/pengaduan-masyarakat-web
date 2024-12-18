@@ -45,7 +45,7 @@ Route::post('comment/{report}', [CommentController::class, 'store'])->name('comm
 // staff
 Route::get('/report', [StaffController::class, 'report'])->name('report.staff');
 Route::post('/response/report/{id}', [ResponseController::class, 'response'])->name('response.staff');
-Route::get('/report/response/{id}', [ResponseController::class, 'responseIndex'])->name('response.index');
+Route::get('/report/response/{ReportId}', [ResponseController::class, 'responseIndex'])->name('response.index');
 
 
 // Export
