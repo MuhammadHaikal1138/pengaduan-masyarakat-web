@@ -7,14 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class ResponseProgress extends Model
 {
     protected $fillable = [
-        'report_id',
+        'response_id',
         'histories',
     ];
 
-    public function report()
-    {
-        return $this->belongsTo(Report::class);
-    }
 
     public function response()
     {

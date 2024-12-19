@@ -48,7 +48,7 @@ class ReportsExport implements FromCollection, WithHeadings, WithMapping, WithSt
 
     public function map($report): array
     {
-        $responseProgressHistories = $report->responseProgress->pluck('histories')->toArray();
+        $responseProgressHistories = $report->response?->responseProgress?->pluck('histories')->toArray();
         $staffProvince = StaffProvince::with('user')
             ->where('user_id', $report->response?->pluck('staff_id')->first())
             ->first()?->user->email ?? 'Belum Ditanggapi';

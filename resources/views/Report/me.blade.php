@@ -7,7 +7,8 @@
     <title>Pengaduan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     {{-- cdn jquery --}}
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
@@ -52,9 +53,13 @@
                         <!-- Data Tab -->
                         <div class="tab-pane fade show active" id="data-{{ $report->id }}">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item bg-warning text-white"><strong>Tipe:</strong> {{ $report->type }}</li>
-                                <li class="list-group-item bg-warning text-white"><strong>Lokasi:</strong> {{ $report->village }}, {{ $report->subdistrict }}, {{ $report->regency }}, {{ $report->province }}</li>
-                                <li class="list-group-item bg-warning text-white"><strong>Deskripsi:</strong> {{ $report->description }}</li>
+                                <li class="list-group-item bg-warning text-white"><strong>Tipe:</strong>
+                                    {{ $report->type }}</li>
+                                <li class="list-group-item bg-warning text-white"><strong>Lokasi:</strong>
+                                    {{ $report->village }}, {{ $report->subdistrict }}, {{ $report->regency }},
+                                    {{ $report->province }}</li>
+                                <li class="list-group-item bg-warning text-white"><strong>Deskripsi:</strong>
+                                    {{ $report->description }}</li>
                             </ul>
                         </div>
 
@@ -72,26 +77,24 @@
 
                         <!-- Status Tab -->
                         <div class="tab-pane fade" id="status-{{ $report->id }}">
-                            @if ($report->response !== null && $report->response->isNotEmpty())
-                                
+                            @if ($report->response)
                             @else
-                            <p>Pengaduan belum direspon petugas, ingin menghapus pengaduan?</p>
-                            <button class="btn btn-danger mt-2" onclick="showModal({{ $report->id }}, '{{ $report->created_at }}')">
-                                Delete
-                            </button>
+                                <p>Pengaduan belum direspon petugas, ingin menghapus pengaduan?</p>
+                                <button class="btn btn-danger mt-2"
+                                    onclick="showModal({{ $report->id }}, '{{ $report->created_at }}')">
+                                    Delete
+                                </button>
                             @endif
 
+                            <p class="{{$report->response?->response_status ?? "d-none"}}">Status Respon : <span class="fw-bold p-1 rounded">{{$report->response?->response_status}}</span></p>
                             <h5 class="mt-4">Response History</h5>
                             <ol class="timeline">
-                                @forelse ($report->responseProgress as $progress)
-                                    @php
-                                        // Decode JSON from histories column
-                                        $histories = json_decode($progress->histories, true);
-                                    @endphp
-                                    <li class="mb-3">
-                                        <strong>{{ $progress->created_at->format('d M Y, H:i') }}</strong>
-                                        <p>{{ $histories['response'] }}</p>
-                                    </li>
+                                {{-- @forelse ($report->response?->responseProgress ?? [] as $progress) --}}
+                                @forelse ($report->response?->responseProgress ?? [] as $progress)
+                                        <li class="mb-3">
+                                            <strong>{{ $progress->histories }}</strong>
+                                            <p></p>
+                                        </li>
                                 @empty
                                     <p class="text-muted">Belum ada respons</p>
                                 @endforelse
@@ -148,11 +151,11 @@
             // Set action untuk form delete, mengarah ke route penghapusan report
             let action = "{{ route('report.destroy', ':id') }}";
             action = action.replace(':id', id);
-            
-            
+
+
             // Ubah action form delete
             $('#form-delete-report').attr('action', action);
-            
+
             // Tampilkan ID report dan tanggal pembuatan report di modal
             $('#report-id').text(id);
             $('#created_at-report').text(createdAt);

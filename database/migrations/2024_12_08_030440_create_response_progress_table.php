@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('response_progress', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('report_id')->constrained()->onDelete('cascade');
-            $table->json('histories');
+            $table->foreignId('response_id')->constrained()->onDelete('cascade');
+            $table->string('histories');
             $table->timestamps();
         });
     }

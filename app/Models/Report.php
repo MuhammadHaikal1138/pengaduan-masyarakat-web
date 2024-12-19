@@ -33,13 +33,6 @@ class Report extends Model
         return $this->hasOne(Response::class);
     }
 
-  // Report.php
-  public function responseProgress()
-  {
-      return $this->hasMany(ResponseProgress::class, 'report_id', 'id');
-  }
-
-
     // Report.php
     public function likes()
 {

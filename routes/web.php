@@ -8,6 +8,8 @@ use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
+use function Laravel\Prompts\progress;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,7 +38,7 @@ Route::get('/report/create', [ReportController::class, 'ReportCreate'])->name('r
 Route::post('/report/store', [ReportController::class, 'ReportStore'])->name('report.store');
 Route::delete('/report/delete/{report}', [ReportController::class, 'destroy'])->name('report.destroy');
 
-Route::get('/report/me', [ReportController::class, 'ReportMe'])->name('report.me');
+Route::get('/report/me/', [ReportController::class, 'ReportMe'])->name('report.me');
 
 // commment dan vote
 Route::post('/reports/{id}/vote', [ReportController::class, 'vote'])->name('reports.vote');
@@ -46,6 +48,9 @@ Route::post('comment/{report}', [CommentController::class, 'store'])->name('comm
 Route::get('/report', [StaffController::class, 'report'])->name('report.staff');
 Route::post('/response/report/{id}', [ResponseController::class, 'response'])->name('response.staff');
 Route::get('/report/response/{ReportId}', [ResponseController::class, 'responseIndex'])->name('response.index');
+Route::post('/response/add/{report}', [ResponseController::class, 'add'])->name('response.add');
+Route::delete('/response/progress/delete/{id}', [ResponseController::class, 'destroyProgress'])->name('progress.delete');
+Route::put('/response/progress/update/{id}', [ResponseController::class, 'update'])->name('progress.update');
 
 
 // Export

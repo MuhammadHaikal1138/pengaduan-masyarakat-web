@@ -22,4 +22,10 @@ class Response extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function responseProgress()
+    {
+
+        return $this->hasMany(ResponseProgress::class);
+    }
+
 }

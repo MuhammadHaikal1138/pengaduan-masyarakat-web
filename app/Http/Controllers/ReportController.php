@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Report;
+use App\Models\Response;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -57,7 +58,7 @@ class ReportController extends Controller
     }
 
     public function ReportMe(){
-        $reports = Report::where('user_id', auth()->id())->get();
+        $reports = Report::with('response')->where('user_id', auth()->id())->get();
         return view('Report.me', compact('reports'));
     }
 

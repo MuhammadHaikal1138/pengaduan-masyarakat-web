@@ -50,38 +50,42 @@
                         </thead>
                         <tbody>
                             @foreach ($reports as $report)
-                                <tr>
-                                    <td class="d-flex align-items-center">
-                                        <img src="{{ asset('storage/' . $report->image) }}" class="rounded" width="50"
-                                            height="50" alt="Gambar Pengaduan">
-                                        <div class="ml-3">
-                                            <strong>{{ $report->user->email }}</strong>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p>{{ $report->village }}, {{ $report->subdistrict }}, {{ $report->regency }}</p>
-                                        <p>{{ $report->created_at->format('d F Y') }}</p>
-                                    </td>
-                                    <td>{{ Str::limit($report->description, 50) }}</td>
-                                    <td>{{ count(json_decode($report->voting ?? '[]', true))}}</td>
-                                    <td class="align-items-center justify-content-center">
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary btn-sm dropdown-toggle py-1 px-3" type="button"
-                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Aksi
-                                            </button>
-                                            <form action="">
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <li>
-                                                        <button type="button" class="btn" onclick="showModal({{ $report->id }})">
-                                                            Tindak Lanjuti
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </form>                                            
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="d-flex align-items-center">
+                                    <img src="{{ asset('storage/' . $report->image) }}" class="rounded" width="50"
+                                        height="50" alt="Gambar Pengaduan">
+                                    <div class="ml-3">
+                                        <strong>{{ $report->user->email }}</strong>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p>{{ $report->village }}, {{ $report->subdistrict }}, {{ $report->regency }}</p>
+                                    <p>{{ $report->created_at->format('d F Y') }}</p>
+                                </td>
+                                <td>{{ Str::limit($report->description, 50) }}</td>
+                                <td>{{ count(json_decode($report->voting ?? '[]', true))}}</td>
+                                <td class="align-items-center justify-content-center">
+                                    @if ($report->response?->response_status == 'DONE')
+                                        <p class="bg-success text-light p-2 rounded">DONE</p>
+                                    @else
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary btn-sm dropdown-toggle py-1 px-3" type="button"
+                                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Aksi
+                                        </button>
+                                        <form action="">
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <li>
+                                                    <button type="button" class="btn" onclick="showModal({{ $report->id }})">
+                                                        Tindak Lanjuti
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </form>                                            
+                                    </div>
+                                    @endif
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -91,7 +95,7 @@
     </div>
 
 
-    <!-- Modal Hapus Report -->
+    <!-- Modal Report -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form action="" id="form-response" method="POST">
