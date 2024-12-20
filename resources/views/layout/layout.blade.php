@@ -38,6 +38,9 @@
                     </li>
                 </ul>
                 <div class="d-flex align-items-center ms-auto">
+                    @if (Auth::user()->role == 'HEAD_STAFF')
+                        <a href="{{route('headstaff.create')}}" class="btn btn-primary">Kelola Akun</a>
+                    @endif
                     <form action="{{route('logout')}}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-default px-3 me-2">

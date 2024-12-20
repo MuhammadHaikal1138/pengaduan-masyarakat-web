@@ -24,7 +24,7 @@ class AuthController extends Controller
                 case 'STAFF':
                     return redirect()->route('report.staff');
                 case 'HEAD_STAFF':
-                    return redirect()->route('head_staff.dashboard');
+                    return redirect()->route('headstaff.dashboard');
             }
         } else {
             return redirect()->back()->with('error', 'Gagal Login');

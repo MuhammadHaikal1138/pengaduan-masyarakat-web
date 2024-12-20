@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\HeadStaffController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\StaffController;
@@ -55,3 +56,9 @@ Route::put('/response/progress/update/{id}', [ResponseController::class, 'update
 
 // Export
 Route::get('export-report', [ExportController::class, 'export'])->name('export');
+
+// HeadStaff
+Route::get('/dashboard', [HeadStaffController::class, 'dashboard'])->name('headstaff.dashboard');
+Route::get('/dashboard/create', [HeadStaffController::class, 'create'])->name('headstaff.create');
+Route::post('/dashboard/store', [HeadStaffController::class,'store'])->name('headstaff.store');
+

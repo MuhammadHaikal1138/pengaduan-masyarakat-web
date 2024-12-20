@@ -8,7 +8,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class StaffSeeder extends Seeder
+class HeadStaffSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -56,26 +56,20 @@ class StaffSeeder extends Seeder
         ];
 
         foreach ($provinces as $province) {
-            // Format password menjadi nama_prov123
-            $password = strtolower(str_replace(' ', '', $province)) . '123';
+            $password = strtolower(str_replace(' ', '', $province)) . '_head123';
+            $email = 'headstaff_' . strtolower(str_replace(' ', '_', $province)) . '@gmail.com';
 
-            // Format email untuk 2 kata, ganti spasi dengan underscore
-            $email = 'staff_' . strtolower(str_replace( ' ', '_', $province)) . '@gmail.com';
-
-
-
-            // Buat user untuk staff
+            // Buat user untuk HeadStaff
             $user = User::create([
                 'email' => $email,
                 'password' => Hash::make($password),
-                'role' => 'STAFF',
+                'role' => 'HEAD_STAFF',
             ]);
 
-            // Buat entri di tabel staff_provinces
             StaffProvince::create([
                 'user_id' => $user->id,
-                'province' => strtoupper($province),    
+                'province' => strtoupper($province),
             ]);
         }
     }
-    }
+}
